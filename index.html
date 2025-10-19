@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Maya — Virtual Girlfriend Subscription</title>
+  <meta name="description" content="Subscribe to get a personalised AI girlfriend experience. Free trial available.">
+  <style>
+    :root{--accent:#7c3aed;--bg:#0f172a;--card:#0b1220;--muted:#9aa4b2}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,#071026 0%, #071728 60%);color:#e6eef8;display:flex;align-items:center;justify-content:center;padding:32px}
+    .wrap{max-width:980px;width:100%}
+    header{display:flex;gap:20px;align-items:center;margin-bottom:18px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700}
+    h1{margin:0;font-size:28px}
+    p.lead{color:var(--muted);margin-top:6px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:28px;margin-top:22px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .features li{margin:12px 0;color:#cfe6ff}
+    form label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=email],input[type=text]{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    button{margin-top:12px;width:100%;padding:12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#4f46e5);color:#fff;font-weight:600}
+    .small{font-size:13px;color:var(--muted);margin-top:10px}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="logo">MG</div>
+      <div>
+        <h1>Maya — Your AI Girlfriend (trial available)</h1>
+        <p class="lead">Personalised conversational companion, safe & respectful. Subscribe to unlock custom personalities, voice, and memory features.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>What you get</h2>
+        <ul class="features">
+          <li>Custom personalities (choose tone, interests, flirting level)</li>
+          <li>Memory & continuity — remembers details you share</li>
+          <li>Secure account & simple subscription management</li>
+          <li>Safe-by-default: no real-world meetups, no requests for sensitive info</li>
+        </ul>
+
+        <h3>How it works</h3>
+        <p class="small">After subscribing you will receive an email with instructions to create or link your AI companion (Character.AI / Replika / Anima-compatible persona). We provide ready-to-import persona prompts and quick setup guides.</p>
+
+        <h3 style="margin-top:18px">Pricing</h3>
+        <p class="small">This demo site uses a free-trial / freemium model. Replace with your own pricing or payment provider when ready.</p>
+
+      </section>
+
+      <aside class="card">
+        <h3>Join the waitlist / subscribe</h3>
+        <!-- REPLACE `FORM_ACTION` with your form endpoint (Mailchimp / MailerLite / Formspree / Getform) -->
+        <form id="subscribeForm" action="REPLACE_WITH_FORM_ACTION" method="POST" onsubmit="return onSubmit(event)">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="name">Name (optional)</label>
+          <input id="name" name="name" type="text" placeholder="How should Maya call you?">
+
+          <label for="tier">Interested plan</label>
+          <input id="tier" name="tier" type="text" placeholder="e.g. Free trial / Premium">
+
+          <button type="submit">Get access — Free trial</button>
+        </form>
+        <p class="small">We’ll never share your email. To connect payments later use Stripe or Paddle — those integrate easily with Netlify/Vercel serverless functions.</p>
+        <div id="msg" class="small" style="display:none;margin-top:8px"></div>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Deploy this single file to GitHub Pages, Netlify, Vercel, or Cloudflare Pages. See instructions in the project canvas (notes) for quick deploy steps.</p>
+    </footer>
+  </main>
+
+  <script>
+    function onSubmit(e){
+      e.preventDefault();
+      const form = e.target;
+      const action = form.action;
+      if(!action || action.includes('REPLACE_WITH_FORM_ACTION')){
+        const msg = document.getElementById('msg');
+        msg.style.display='block';
+        msg.textContent = 'Form action not configured. Replace FORM_ACTION with your email provider endpoint (see instructions).';
+        return false;
+      }
+      // default fallback: submit normally if user configured action
+      return true;
+    }
+  </script>
+
+  <!-- Notes: 
+    * To enable subscriptions: create a form in MailerLite / Mailchimp / Formspree and paste the provided form action URL into the form `action` attribute above.
+    * For payments & gated content: use Stripe Checkout or Paddle and handle webhooks with serverless functions (Netlify Functions / Vercel Serverless / Cloudflare Workers).
+    * This page is intentionally static/simple so it can be hosted on free static hosts (GitHub Pages, Netlify, Vercel, Cloudflare Pages). See hosting instructions in the chat window. 
+  -->
+</body>
+</html>
